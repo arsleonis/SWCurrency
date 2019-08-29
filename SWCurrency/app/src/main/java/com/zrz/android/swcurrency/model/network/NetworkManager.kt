@@ -3,10 +3,9 @@ package com.zrz.android.swcurrency.model.network
 interface NetworkManager {
 
     fun doGetRequest(
-        header1: String,
-        header2:String,
+        url: String,
         baseCurrency: String = "",
         secondaryCurrency: String = "",
         currenciesList: String = ""
-        ) : String
+        ): String
 }

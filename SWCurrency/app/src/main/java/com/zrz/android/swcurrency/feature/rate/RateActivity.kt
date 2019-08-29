@@ -6,8 +6,9 @@ import com.zrz.android.swcurrency.R
 import com.zrz.android.swcurrency.core.base.BaseActivity
 import com.zrz.android.swcurrency.entity.SWCurrency
 import com.zrz.android.swcurrency.feature.converter.ConverterActivity
-import com.zrz.android.swcurrency.util.startNewActivity
+import com.zrz.android.swcurrency.util.extension.startNewActivity
 import kotlinx.android.synthetic.main.activity_rate.*
+import kotlinx.android.synthetic.main.layout_rate_app_bar.*
 import org.koin.android.ext.android.inject
 
 class RateActivity : BaseActivity() {
@@ -22,6 +23,7 @@ class RateActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         recyclerViewInitializing()
         observeLiveData()
+        tvBaseCurrencyCharCode.text = BASE_CURRENCY_CODE
         requestLatestRates()
     }
 
@@ -42,8 +44,11 @@ class RateActivity : BaseActivity() {
         chatLayoutManager.stackFromEnd
         rateAdapter = RateAdapter()
         rateAdapter.itemClickAction = { position, _ ->
-            onItemClick(rateAdapter.rates[position])
-            rvRate.apply {
+            onItemClick(
+                rateAdapter.rates[position],
+                SWCurrency(BASE_CURRENCY_CODE, "Euro", "EU", 1.00)
+            )
+            rvRates.apply {
                 layoutManager = chatLayoutManager
                 adapter = rateAdapter
             }

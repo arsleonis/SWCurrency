@@ -2,7 +2,7 @@ package com.zrz.android.swcurrency.core.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.zrz.android.swcurrency.util.addItemDiff
+import com.zrz.android.swcurrency.util.extension.addItemDiff
 
 abstract class BaseAdapter<T, VH : BaseAdapter.BaseViewHolder<T>>(
     val rates: MutableList<T> = mutableListOf(),

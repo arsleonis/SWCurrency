@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class SWCurrency(
-    val code: String,
+    val charCode: String,
     val name: String,
     val country: String,
     val rate: Double

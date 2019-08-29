@@ -1,4 +1,4 @@
-package com.zrz.android.swcurrency.util
+package com.zrz.android.swcurrency.util.extension
 
 import com.zrz.android.swcurrency.BuildConfig.APPLICATION_ID
 import com.zrz.android.swcurrency.feature.rate.RateActivity.Companion.BUNDLE_KEY

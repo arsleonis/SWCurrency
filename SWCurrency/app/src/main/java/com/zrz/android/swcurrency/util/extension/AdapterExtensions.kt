@@ -1,4 +1,4 @@
-package com.zrz.android.swcurrency.util
+package com.zrz.android.swcurrency.util.extension
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView

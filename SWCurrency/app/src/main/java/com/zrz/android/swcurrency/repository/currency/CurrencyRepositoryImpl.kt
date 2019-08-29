@@ -5,11 +5,10 @@ import com.zrz.android.swcurrency.model.network.NetworkManager
 
 class CurrencyRepositoryImpl(private val networkManager: NetworkManager) : CurrencyRepository {
 
-    override fun requestLatestRates(baseCurrencyCode: String): List<SWCurrency> {
+    override fun getLatestRates(baseCurrencyCode: String): List<SWCurrency> {
         val supportedSymbols = getSupportedSymbols()
         val latestRatesResponse = networkManager.doGetRequest(
-            header1 = HEADER_API_HOST,
-            header2 = HEADER_API_KEY,
+            url = URL_LATEST_RATES,
             baseCurrency = baseCurrencyCode,
             currenciesList = supportedSymbols
         )
@@ -17,7 +16,7 @@ class CurrencyRepositoryImpl(private val networkManager: NetworkManager) : Curre
     }
 
     private fun getSupportedSymbols(): String {
-        val symbolsResponse = networkManager.doGetRequest(HEADER_API_HOST, HEADER_API_KEY)
+        val symbolsResponse = networkManager.doGetRequest(URL_SUPPORTED_SYMBOLS)
         val symbols: String =""
         // transform response to symbols
         return symbols
@@ -30,7 +29,8 @@ class CurrencyRepositoryImpl(private val networkManager: NetworkManager) : Curre
     }
 
     companion object {
-        const val HEADER_API_HOST = "fixer-fixer-currency-v1.p.rapidapi.com"
-        const val HEADER_API_KEY = "62ebd6304emshcb8ec6d137fc865p1a9ff5jsn012f0c671e04"
+        const val URL_SUPPORTED_SYMBOLS = "https://fixer-fixer-currency-v1.p.rapidapi.com/symbols"
+        const val URL_LATEST_RATES = "https://fixer-fixer-currency-v1.p.rapidapi.com/latest?base=USD&symbols=GBP%2CJPY%2CEUR"
+        const val URL_CONVERT = "https://fixer-fixer-currency-v1.p.rapidapi.com/convert?from=USD&to=ILS&amount=12"
     }
 }

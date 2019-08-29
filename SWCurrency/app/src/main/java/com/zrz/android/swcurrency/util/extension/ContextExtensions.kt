@@ -1,4 +1,4 @@
-package com.zrz.android.swcurrency.util
+package com.zrz.android.swcurrency.util.extension
 
 import android.content.Intent
 import android.os.Bundle

@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import com.zrz.android.swcurrency.R
 import com.zrz.android.swcurrency.core.base.BaseAdapter
 import com.zrz.android.swcurrency.entity.SWCurrency
-import com.zrz.android.swcurrency.util.inflateView
+import com.zrz.android.swcurrency.util.extension.inflateView
+import kotlinx.android.synthetic.main.item_rate.view.*
 
 class RateAdapter : BaseAdapter<SWCurrency, RateAdapter.RateViewHolder>() {
 
@@ -17,6 +18,9 @@ class RateAdapter : BaseAdapter<SWCurrency, RateAdapter.RateViewHolder>() {
 
     class RateViewHolder(view: View) : BaseViewHolder<SWCurrency>(view) {
         override fun onBind(currency: SWCurrency) {
+            itemView.ivCurrencyFlag.setImageResource(R.drawable.ic_contact_phone_black_48dp)
+            itemView.tvCurrencyCharCode.text = currency.charCode
+            itemView.tvCurrencyRate.text = currency.rate.toString()
         }
     }
 }
