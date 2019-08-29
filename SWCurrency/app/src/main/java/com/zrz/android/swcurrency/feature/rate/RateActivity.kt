@@ -1,27 +1,40 @@
 package com.zrz.android.swcurrency.feature.rate
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zrz.android.swcurrency.R
+import com.zrz.android.swcurrency.core.base.BaseActivity
 import com.zrz.android.swcurrency.entity.SWCurrency
 import com.zrz.android.swcurrency.feature.converter.ConverterActivity
 import com.zrz.android.swcurrency.util.startNewActivity
 import kotlinx.android.synthetic.main.activity_rate.*
+import org.koin.android.ext.android.inject
 
-class RateActivity : AppCompatActivity() {
+class RateActivity : BaseActivity() {
+
+    private val rateViewModel: RateViewModel by inject()
 
     private lateinit var rateAdapter: RateAdapter
 
+    override fun obtainLayoutResID(): Int = R.layout.activity_rate
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rate)
         recyclerViewInitializing()
         observeLiveData()
+        requestLatestRates()
     }
 
-    private fun onItemClick(currency: SWCurrency) {
-        startNewActivity<ConverterActivity>(KEY_LOGIN, KEY_NAME to currency.country)
+    private fun requestLatestRates(){
+        rateViewModel.requestLatestRates(BASE_CURRENCY_CODE)
+    }
+
+    private fun onItemClick(baseCurrency: SWCurrency, selectedCurrency: SWCurrency) {
+        startNewActivity<ConverterActivity>(
+            KEY_CONVERTER,
+            KEY_BASE_CURRENCY to baseCurrency,
+            KEY_SELECTED_CURRENCY to selectedCurrency
+            )
     }
 
     private fun recyclerViewInitializing() {
@@ -38,12 +51,15 @@ class RateActivity : AppCompatActivity() {
     }
 
     private fun observeLiveData(){
-
+        observingAction(rateViewModel.throwableLD, { handleError(it) })
+        observingAction(rateViewModel.ratesLD, { rateAdapter.updateRate(it) })
     }
 
     companion object {
-        const val KEY_LOGIN = "key_login"
-        const val KEY_NAME = "key_name"
+        const val BASE_CURRENCY_CODE = "EUR"
+        const val KEY_CONVERTER = "key_converter"
+        const val KEY_BASE_CURRENCY = "key_base_currency"
+        const val KEY_SELECTED_CURRENCY = "key_selected_currency"
         const val BUNDLE_KEY = "key_bundle"
         const val INTENT_KEY = "key_intent"
     }
