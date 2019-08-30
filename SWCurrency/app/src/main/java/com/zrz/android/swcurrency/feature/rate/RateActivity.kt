@@ -46,12 +46,12 @@ class RateActivity : BaseActivity() {
         rateAdapter.itemClickAction = { position, _ ->
             onItemClick(
                 rateAdapter.rates[position],
-                SWCurrency(BASE_CURRENCY_CODE, "Euro", "EU", 1.00)
+                SWCurrency(BASE_CURRENCY_CODE, 1.00)
             )
-            rvRates.apply {
-                layoutManager = chatLayoutManager
-                adapter = rateAdapter
-            }
+        }
+        rvRates.apply {
+            layoutManager = chatLayoutManager
+            adapter = rateAdapter
         }
     }
 

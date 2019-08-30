@@ -18,7 +18,7 @@ abstract class BaseActivity : AppCompatActivity() {
         setContentView(obtainLayoutResID())
     }
 
-    fun showToast(text: String, gravity: Int = Gravity.BOTTOM) {
+    private fun showToast(text: String, gravity: Int = Gravity.BOTTOM) {
         val toast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
         toast.setGravity(gravity, 0, 0)
         toast.show()

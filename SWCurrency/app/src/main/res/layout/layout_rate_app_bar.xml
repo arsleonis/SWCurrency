@@ -30,8 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:background="@android:color/transparent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_contact_phone_black_48dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/un_flag"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/guidelineCenter"
                 app:layout_constraintTop_toTopOf="parent" />

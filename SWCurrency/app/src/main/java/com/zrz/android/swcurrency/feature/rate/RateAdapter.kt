@@ -14,11 +14,11 @@ class RateAdapter : BaseAdapter<SWCurrency, RateAdapter.RateViewHolder>() {
         RateViewHolder(parent.inflateView(R.layout.item_rate))
 
     override fun compareItemsById(): (Pair<SWCurrency, SWCurrency>) -> Boolean =
-        { messagePair -> messagePair.first.country == messagePair.second.country }
+        { messagePair -> messagePair.first.charCode == messagePair.second.charCode }
 
     class RateViewHolder(view: View) : BaseViewHolder<SWCurrency>(view) {
         override fun onBind(currency: SWCurrency) {
-            itemView.ivCurrencyFlag.setImageResource(R.drawable.ic_contact_phone_black_48dp)
+            itemView.ivCurrencyFlag.setImageResource(R.mipmap.un_flag)
             itemView.tvCurrencyCharCode.text = currency.charCode
             itemView.tvCurrencyRate.text = currency.rate.toString()
         }
